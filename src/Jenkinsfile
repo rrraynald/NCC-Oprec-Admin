@@ -14,7 +14,9 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir ('src') {
+                    sh 'npm install'
+                }
             }
         }
 
@@ -22,11 +24,14 @@ pipeline {
             parallel {
                 stage ('Build') {
                     steps {
-                        sh 'node -e "const app = require(\'./index\'); console.log(\'Build OK\')"'
+                        dir ('src') {
+                            sh 'node -e "const app = require(\'./index\'); console.log(\'Build OK\')"'
+                        }
                     }
                 }
                 stage ('Test') {
                     steps {
+                        dir ('src') {
                         sh 'npm test'
                     }
                 }
