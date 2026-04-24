@@ -1,0 +1,64 @@
+pipeline {
+    agent any
+
+    environment {
+        SCANNER_HOME = tool 'SonarScanner'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build & Test') {
+            parallel {
+                stage ('Build') {
+                    steps {
+                        sh 'node -e "const app = require(\'./index\'); console.log(\'Build OK\')"'
+                    }
+                }
+                stage ('Test') {
+                    steps {
+                        sh 'npm test'
+                    }
+                }
+            }
+        }        
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "${SCANNER_HOME}/bin/sonar-scanner"
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline finished with status: ${currentBuild.currentResult}"
+        }
+        success {
+            echo 'All stages passed! Code quality verified.'
+        }
+        failure {
+            echo 'Pipeline failed. Check logs for details.'
+        }
+    }
+}

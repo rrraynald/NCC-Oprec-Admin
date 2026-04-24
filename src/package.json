@@ -1,0 +1,29 @@
+{
+  "name": "ncc-oprec-admin",
+  "version": "1.0.0",
+  "description": "Repository for NCC Admin Open Recruitment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --coverage --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrraynald/NCC-Oprec-Admin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rrraynald/NCC-Oprec-Admin/issues"
+  },
+  "homepage": "https://github.com/rrraynald/NCC-Oprec-Admin#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
+}
