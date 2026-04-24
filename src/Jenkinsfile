@@ -14,7 +14,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                dir ('src') {
+                dir('src') {
                     sh 'npm install'
                 }
             }
@@ -22,21 +22,22 @@ pipeline {
 
         stage('Build & Test') {
             parallel {
-                stage ('Build') {
+                stage('Build') {
                     steps {
-                        dir ('src') {
+                        dir('src') {
                             sh 'node -e "const app = require(\'./index\'); console.log(\'Build OK\')"'
                         }
                     }
                 }
-                stage ('Test') {
+                stage('Test') {
                     steps {
-                        dir ('src') {
-                        sh 'npm test'
+                        dir('src') {
+                            sh 'npm test'
+                        }
                     }
                 }
             }
-        }        
+        }
 
         stage('SonarQube Analysis') {
             steps {
