@@ -102,8 +102,8 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
 Pilih "Install suggested plugins", lalu buat admin user. Setelah itu install plugin tambahan di **Manage Jenkins -> Plugins -> Available plugins**:
 
-- **SonarQube Scanner** — untuk integrasi dengan SonarQube
-- **Embeddable Build Status** — untuk build badge
+- **SonarQube Scanner** - untuk integrasi dengan SonarQube
+- **Embeddable Build Status** - untuk build badge
 
 ![alt text](<media/Screenshot 2026-04-27 at 17.39.33.png>)
 
@@ -525,7 +525,7 @@ Dokumentasi pipeline yang berjalan:
 
 ![alt text](<media/Screenshot 2026-04-27 at 18.03.59.png>)
 
-    ### 9. Hasil Analisis Kode di SonarQube
+### 9. Hasil Analisis Kode di SonarQube
 
 Setelah pipeline sukses, hasil analisis dapat dilihat di dashboard SonarQube (`http://146.190.111.171:9000`):
 
