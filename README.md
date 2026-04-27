@@ -240,6 +240,32 @@ app.delete("/reset", (req, res) => {
   res.json({ message: "Reset done" });
 });
 
+// // Uncomment fitur berikut untuk trigger code smell, bug, dan vulnerability di SonarQube
+// app.get("/notes/search", (req, res) => {
+//   var query = req.query.q; // code smell: pakai var
+//   var results = [];
+
+//   for (var i = 0; i < notes.length; i++) {
+//     // code smell: var
+//     if (notes[i].title == query) {
+//       // bug: pakai ==, seharusnya ===
+//       results.push(notes[i]);
+//     }
+//   }
+
+//   if (query == undefined) {
+//     // bug: ==, seharusnya ===
+//     return res.status(400).json({ error: "Query required" });
+//   }
+
+//   var password = "admin123"; // vulnerability: hardcoded credential
+//   console.log(password); // code smell: console.log di production
+
+//   eval("var x = 1"); // vulnerability: eval
+
+//   res.json(results);
+// });
+
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
@@ -560,6 +586,11 @@ app.get("/notes/search", (req, res) => {
   res.json(results);
 });
 ```
+
+![alt text](<media/Screenshot 2026-04-27 at 19.47.22.png>)
+![alt text](<media/Screenshot 2026-04-27 at 19.48.36.png>)
+
+Hasil menunjukan pipeline yang failed serta detail issues yang ditemukan di SonarQube, termasuk code smell, bug, dan vulnerability. Dengan adanya fitur ini, developer bisa langsung tahu apa yang salah dan memperbaikinya sebelum merge ke branch utama.
 
 ### Build Badge
 

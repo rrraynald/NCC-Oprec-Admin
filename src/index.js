@@ -52,31 +52,31 @@ app.delete("/reset", (req, res) => {
   res.json({ message: "Reset done" });
 });
 
-// Uncomment fitur berikut untuk trigger code smell, bug, dan vulnerability di SonarQube
-app.get("/notes/search", (req, res) => {
-  var query = req.query.q; // code smell: pakai var
-  var results = [];
+// // Uncomment fitur berikut untuk trigger code smell, bug, dan vulnerability di SonarQube
+// app.get("/notes/search", (req, res) => {
+//   var query = req.query.q; // code smell: pakai var
+//   var results = [];
 
-  for (var i = 0; i < notes.length; i++) {
-    // code smell: var
-    if (notes[i].title == query) {
-      // bug: pakai ==, seharusnya ===
-      results.push(notes[i]);
-    }
-  }
+//   for (var i = 0; i < notes.length; i++) {
+//     // code smell: var
+//     if (notes[i].title == query) {
+//       // bug: pakai ==, seharusnya ===
+//       results.push(notes[i]);
+//     }
+//   }
 
-  if (query == undefined) {
-    // bug: ==, seharusnya ===
-    return res.status(400).json({ error: "Query required" });
-  }
+//   if (query == undefined) {
+//     // bug: ==, seharusnya ===
+//     return res.status(400).json({ error: "Query required" });
+//   }
 
-  var password = "admin123"; // vulnerability: hardcoded credential
-  console.log(password); // code smell: console.log di production
+//   var password = "admin123"; // vulnerability: hardcoded credential
+//   console.log(password); // code smell: console.log di production
 
-  eval("var x = 1"); // vulnerability: eval
+//   eval("var x = 1"); // vulnerability: eval
 
-  res.json(results);
-});
+//   res.json(results);
+// });
 
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
