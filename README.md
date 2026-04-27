@@ -529,6 +529,38 @@ Konfigurasi di GitHub: **Settings -> Webhooks -> Add webhook:**
 
 Setelah webhook aktif, setiap push ke branch `Tugas-2` otomatis trigger pipeline di Jenkins tanpa perlu klik "Build Now" manual. Terlihat di Jenkins: **"Started by GitHub push by rrraynald"**.
 
+### 10. Intentional Failure Test di SonarQube
+
+Uncomment test case berikut di [src/index.test.js](./src/index.test.js) untuk trigger SonarQube Quality Gate failure:
+
+```javascript
+// Uncomment fitur berikut untuk trigger code smell, bug, dan vulnerability di SonarQube
+app.get("/notes/search", (req, res) => {
+  var query = req.query.q; // code smell: pakai var
+  var results = [];
+
+  for (var i = 0; i < notes.length; i++) {
+    // code smell: var
+    if (notes[i].title == query) {
+      // bug: pakai ==, seharusnya ===
+      results.push(notes[i]);
+    }
+  }
+
+  if (query == undefined) {
+    // bug: ==, seharusnya ===
+    return res.status(400).json({ error: "Query required" });
+  }
+
+  var password = "admin123"; // vulnerability: hardcoded credential
+  console.log(password); // code smell: console.log di production
+
+  eval("var x = 1"); // vulnerability: eval
+
+  res.json(results);
+});
+```
+
 ### Build Badge
 
 Install plugin **Embeddable Build Status** di Jenkins untuk menampilkan badge status build.
