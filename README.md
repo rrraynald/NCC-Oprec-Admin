@@ -525,7 +525,7 @@ Dokumentasi pipeline yang berjalan:
 
 ![alt text](<media/Screenshot 2026-04-27 at 18.03.59.png>)
 
-### 9. Hasil Analisis Kode di SonarQube
+### 8. Hasil Analisis Kode di SonarQube
 
 Setelah pipeline sukses, hasil analisis dapat dilihat di dashboard SonarQube (`http://146.190.111.171:9000`):
 
@@ -538,7 +538,7 @@ Metrics yang ditampilkan:
 - **Duplications** - persentase kode yang terduplikasi
 - **Security Hotspots** - potensi masalah keamanan yang perlu ditinjau
 
-### 10. Webhook GitHub (Auto Trigger)
+### 9. Webhook GitHub (Auto Trigger)
 
 Konfigurasi di Jenkins: **Pipeline (ncc-app-pipeline) -> Configure -> Triggers -> centang "GitHub hook trigger for GITScm polling"**
 
